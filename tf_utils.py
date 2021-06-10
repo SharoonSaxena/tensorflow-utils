@@ -1,13 +1,13 @@
-def try_gpu(i=0):  #@save
-    """Return gpu(i) if exists, otherwise return cpu()."""
-    if len(tf.config.experimental.list_physical_devices('GPU')) >= i + 1:
-        return tf.device(f'/GPU:{i}')
-    return tf.device('/CPU:0')
-
-def try_all_gpus():  #@save
-    """Return all available GPUs, or [cpu(),] if no GPU exists."""
-    num_gpus = len(tf.config.experimental.list_physical_devices('GPU'))
-    devices = [tf.device(f'/GPU:{i}') for i in range(num_gpus)]
-    return devices if devices else [tf.device('/CPU:0')]
-
-try_gpu(), try_gpu(10), try_all_gpus()
+def unzipper(data_address, target_directory):
+    """
+    Unzips a zipped file to the target location.
+    
+    params:
+        data_address(string): path to the zipped file
+        target-directory(string): the directory insode which the contents will be extracted
+    """
+    import zipfile
+    data = "/home/sharoonsaxena/Datasets/dogs-vs-cats.zip"
+    zip_ref = zipfile.ZipFile(data, "r")
+    zip_ref.extractall("/home/sharoonsaxena/Datasets/extracted/")
+    zip_ref.close()
